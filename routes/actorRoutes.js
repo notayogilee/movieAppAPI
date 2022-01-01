@@ -22,10 +22,6 @@ router.get('/', cache('2 minutes'), async (req, res) => {
     const apiRes = await needle('get', `${API_BASE_URL}/person/${search}?${params}`);
     const data = apiRes.body;
 
-    if (process.env.NODE_ENV !== 'production') {
-      console.log(`REQUEST: ${API_BASE_URL}/person/${search}?${params}`);
-    }
-
     res.status(200).json(data);
 
   } catch (error) {
@@ -45,10 +41,6 @@ router.get('/:id', cache('2 minutes'), async (req, res) => {
 
     const apiRes = await needle('get', `${API_BASE_URL}/person/${id}?${params}`);
     const data = apiRes.body;
-
-    if (process.env.NODE_ENV !== 'production') {
-      console.log(`REQUEST: ${API_BASE_URL}/person/${search}?${params}`);
-    }
 
     res.status(200).json(data);
 
