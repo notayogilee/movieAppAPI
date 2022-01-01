@@ -11,13 +11,18 @@ app.use(cors());
 
 const limiter = rateLimit({
   windowMs: 10 * 60 * 1000,
-  max: 100
+  max: 1000
 });
 app.use(limiter);
 app.set('trust proxy', 1);
 
-const routes = require('./routes/movies');
-app.use('/api', routes);
+const movieRoutes = require('./routes/movieRoutes');
+const showRoutes = require('./routes/showRoutes');
+const actorRoutes = require('./routes/actorRoutes');
+
+app.use('/api/movies', movieRoutes);
+app.use('/api/shows', showRoutes);
+app.use('/api/actors', actorRoutes);
 
 const PORT = process.env.PORT || 5000;
 
